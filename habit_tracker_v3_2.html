@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="習慣トラッカー">
-<meta name="theme-color" content="#34c759">
+<meta name="theme-color" content="#1a6fd4">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <title>習慣トラッカー</title>
@@ -26,16 +26,12 @@ body{display:flex;flex-direction:column;max-width:600px;margin:0 auto;min-height
 .pages{flex:1;overflow:hidden}
 .page{display:none;padding:14px 12px;overflow-y:auto;max-height:calc(100dvh - 90px)}
 .page.active{display:block}
-
-/* グリッド */
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.col{background:#fff;border-radius:14px;border:1px solid #e8e8e4;overflow:hidden;margin-bottom:0}
+.col{background:#fff;border-radius:14px;border:1px solid #e8e8e4;overflow:hidden}
 .col-head{padding:10px 12px;border-bottom:1px solid #f0f0ec;display:flex;align-items:center;gap:6px;position:sticky;top:0;background:#fff;z-index:2}
 .col-icon{width:28px;height:28px;border-radius:8px;background:#e8f4ee;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;cursor:pointer}
 .col-title-input{font-size:16px;font-weight:400;color:#1a1a18;background:transparent;border:none;outline:none;width:100%;min-width:0}
-.col-title-input::placeholder{color:#ccc;font-weight:400}
-
-/* 月グループ */
+.col-title-input::placeholder{color:#ccc}
 .month-group{border-bottom:1px solid #f0f0ec}
 .month-group:last-child{border-bottom:none}
 .month-header{display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:#f5f5f2;cursor:pointer;user-select:none}
@@ -46,8 +42,6 @@ body{display:flex;flex-direction:column;max-width:600px;margin:0 auto;min-height
 .month-arrow.open{transform:rotate(180deg)}
 .month-dates{display:none}
 .month-dates.open{display:block}
-
-/* 日付行 */
 .date-row{display:flex;align-items:center;justify-content:space-between;padding:9px 14px;border-bottom:1px solid #f5f5f2}
 .date-row:last-child{border-bottom:none}
 .date-row.today{background:#e8f0ff}
@@ -56,19 +50,14 @@ body{display:flex;flex-direction:column;max-width:600px;margin:0 auto;min-height
 .date-md{font-size:15px;color:#000;font-weight:400;white-space:nowrap}
 .date-md.sat{color:#2255cc;font-weight:400}
 .date-md.sun{color:#cc2222;font-weight:400}
-.date-md.past{color:#000;font-weight:400;font-size:15px}
 .date-dow{font-size:11px;color:#bbb;margin-top:1px}
 .today-badge{display:inline-block;font-size:11px;background:#1a6fd4;color:#fff;border-radius:4px;padding:2px 8px;margin-left:6px;font-weight:600;vertical-align:middle}
 .check-btn{width:32px;height:32px;border-radius:8px;border:1.5px solid #d0d0cc;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .12s;position:relative}
 .check-btn.done{background:#34c759;border-color:#34c759}
 .check-btn.done::after{content:'';display:block;width:8px;height:13px;border:2.5px solid #fff;border-top:none;border-left:none;transform:rotate(45deg) translate(-1px,-1px)}
-
-/* ページ名 */
 .page-name-row{display:flex;align-items:center;margin-bottom:10px;gap:8px}
 .page-name-input{font-size:18px;font-weight:600;color:#333;background:transparent;border:none;outline:none;flex:1}
 .del-page-btn{font-size:14px;color:#333;background:transparent;border:none;cursor:pointer;padding:4px 6px;font-weight:500}
-
-/* やることリスト */
 .todo-wrap{background:#fff;border-radius:14px;border:1px solid #e8e8e4;overflow:hidden}
 .todo-head{padding:12px 14px;border-bottom:1px solid #f0f0ec;background:#f0ebff;display:flex;align-items:center;gap:8px}
 .todo-head-title{font-size:14px;font-weight:600;color:#3a1a6c}
@@ -76,7 +65,6 @@ body{display:flex;flex-direction:column;max-width:600px;margin:0 auto;min-height
 .todo-input{flex:1;font-size:16px;padding:8px 10px;border:1px solid #e0e0e0;border-radius:8px;outline:none;background:#f9f9f8}
 .todo-input:focus{border-color:#8a6fbf}
 .todo-add-btn{padding:8px 14px;background:#8a6fbf;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer}
-.todo-list{}
 .todo-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid #f5f5f2}
 .todo-item:last-child{border-bottom:none}
 .todo-check{width:24px;height:24px;border-radius:6px;border:1.5px solid #c0b0e0;background:transparent;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .12s;position:relative}
@@ -84,7 +72,9 @@ body{display:flex;flex-direction:column;max-width:600px;margin:0 auto;min-height
 .todo-check.done::after{content:'';display:block;width:6px;height:10px;border:2px solid #fff;border-top:none;border-left:none;transform:rotate(45deg) translate(-1px,-1px)}
 .todo-text{flex:1;font-size:16px;color:#000;word-break:break-all}
 .todo-text.done{color:#aaa;text-decoration:line-through}
-.todo-del{font-size:16px;color:#333;background:transparent;border:none;cursor:pointer;padding:2px 6px}.todo-move{font-size:18px;color:#333;background:transparent;border:none;cursor:pointer;padding:2px 4px;line-height:1}.todo-move:active{color:#888}
+.todo-move{font-size:18px;color:#333;background:transparent;border:none;cursor:pointer;padding:2px 4px;line-height:1}
+.todo-move:active{color:#888}
+.todo-del{font-size:16px;color:#333;background:transparent;border:none;cursor:pointer;padding:2px 6px}
 .todo-del:active{color:#e04040}
 .todo-empty{padding:24px;text-align:center;font-size:13px;color:#ccc}
 </style>
@@ -98,7 +88,6 @@ body{display:flex;flex-direction:column;max-width:600px;margin:0 auto;min-height
   <div class="tabs" id="tabs"></div>
 </div>
 <div class="pages" id="pages"></div>
-
 <script>
 const DAYS=['日','月','火','水','木','金','土'];
 const ICONS=['🧹','🦷','💊','🏃','📚','💧','🛏️','✍️','🧘','🍳'];
@@ -112,26 +101,18 @@ function loadState(){
       {id:1,name:'日課①',cols:['お風呂掃除','糸ようじ'],icons:['🧹','🦷']},
       {id:2,name:'日課②',cols:['',''],icons:['💊','🏃']}
     ],
-    checks:{},
-    todos:[],
-    openMonths:{}
+    checks:{},todos:[],openMonths:{}
   };
 }
 function saveState(){try{localStorage.setItem('habit_v4',JSON.stringify(state));}catch(e){}}
 
-// 今日から過去365日＋未来30日
 function getDates(){
   const arr=[];
   const today=new Date();today.setHours(0,0,0,0);
-  for(let i=-365;i<=30;i++){
-    const d=new Date(today);
-    d.setDate(today.getDate()+i);
-    arr.push(d);
-  }
+  for(let i=-365;i<=30;i++){const d=new Date(today);d.setDate(today.getDate()+i);arr.push(d);}
   return arr;
 }
 
-// 月ごとにグループ化
 function groupByMonth(dates){
   const groups={};
   dates.forEach(d=>{
@@ -142,7 +123,7 @@ function groupByMonth(dates){
   return groups;
 }
 
-function ds(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;}
+function ds(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
 function isToday(d){const t=new Date();return d.getFullYear()===t.getFullYear()&&d.getMonth()===t.getMonth()&&d.getDate()===t.getDate();}
 function checkKey(pgId,ci,dateStr){return `${pgId}_${ci}_${dateStr}`;}
 
@@ -151,48 +132,43 @@ let todayEl=null;
 let activePageEl=null;
 
 function scrollToToday(){
-  if(todayEl && activePageEl){
+  if(todayEl&&activePageEl){
     const pageRect=activePageEl.getBoundingClientRect();
     const rowRect=todayEl.getBoundingClientRect();
-    const offset=rowRect.top - pageRect.top + activePageEl.scrollTop - (activePageEl.clientHeight/2) + (rowRect.height/2);
-    activePageEl.scrollTo({top:offset, behavior:'smooth'});
+    const offset=rowRect.top-pageRect.top+activePageEl.scrollTop-(activePageEl.clientHeight/2)+(rowRect.height/2);
+    activePageEl.scrollTo({top:offset,behavior:'smooth'});
   }
 }
 
 function renderTodoPage(){
-  const div=document.createElement('div');
-  div.className='page';
-  const wrap=document.createElement('div');
-  wrap.className='todo-wrap';
-  const head=document.createElement('div');
-  head.className='todo-head';
+  const div=document.createElement('div');div.className='page';
+  const wrap=document.createElement('div');wrap.className='todo-wrap';
+  const head=document.createElement('div');head.className='todo-head';
   head.innerHTML='<span style="font-size:18px">📝</span><span class="todo-head-title">やることリスト</span>';
   wrap.appendChild(head);
-  const addRow=document.createElement('div');
-  addRow.className='todo-add-row';
-  const inp=document.createElement('input');
-  inp.type='text';inp.className='todo-input';inp.placeholder='タスクを入力…';
-  const addBtn=document.createElement('button');
-  addBtn.className='todo-add-btn';addBtn.textContent='追加';
-  addRow.appendChild(inp);addRow.appendChild(addBtn);
-  wrap.appendChild(addRow);
-  const list=document.createElement('div');
-  list.className='todo-list';
+  const addRow=document.createElement('div');addRow.className='todo-add-row';
+  const inp=document.createElement('input');inp.type='text';inp.className='todo-input';inp.placeholder='タスクを入力…';
+  const addBtn=document.createElement('button');addBtn.className='todo-add-btn';addBtn.textContent='追加';
+  addRow.appendChild(inp);addRow.appendChild(addBtn);wrap.appendChild(addRow);
+  const list=document.createElement('div');list.className='todo-list';
 
   function renderList(){
     list.innerHTML='';
-    if(!state.todos||state.todos.length===0){
-      list.innerHTML='<div class="todo-empty">タスクがありません</div>';return;
-    }
-    const sorted=state.todos;
-    sorted.forEach(todo=>{
+    if(!state.todos||state.todos.length===0){list.innerHTML='<div class="todo-empty">タスクがありません</div>';return;}
+    state.todos.forEach(todo=>{
       const item=document.createElement('div');item.className='todo-item';
       const chk=document.createElement('button');chk.className='todo-check'+(todo.done?' done':'');
       chk.onclick=()=>{const t=state.todos.find(x=>x.id===todo.id);if(t){t.done=!t.done;saveState();renderList();}};
       const txt=document.createElement('div');txt.className='todo-text'+(todo.done?' done':'');txt.textContent=todo.text;
-      const moveUp=document.createElement('button');moveUp.className='todo-move';moveUp.textContent='▲';moveUp.onclick=()=>{const idx=state.todos.findIndex(x=>x.id===todo.id);if(idx>0){const tmp=state.todos[idx-1];state.todos[idx-1]=state.todos[idx];state.todos[idx]=tmp;saveState();renderList();}};const moveDown=document.createElement('button');moveDown.className='todo-move';moveDown.textContent='▼';moveDown.onclick=()=>{const idx=state.todos.findIndex(x=>x.id===todo.id);if(idx<state.todos.length-1){const tmp=state.todos[idx+1];state.todos[idx+1]=state.todos[idx];state.todos[idx]=tmp;saveState();renderList();}};const del=document.createElement('button');del.className='todo-del';del.textContent='✕';
+      const moveUp=document.createElement('button');moveUp.className='todo-move';moveUp.textContent='▲';
+      moveUp.onclick=()=>{const idx=state.todos.findIndex(x=>x.id===todo.id);if(idx>0){const tmp=state.todos[idx-1];state.todos[idx-1]=state.todos[idx];state.todos[idx]=tmp;saveState();renderList();}};
+      const moveDown=document.createElement('button');moveDown.className='todo-move';moveDown.textContent='▼';
+      moveDown.onclick=()=>{const idx=state.todos.findIndex(x=>x.id===todo.id);if(idx<state.todos.length-1){const tmp=state.todos[idx+1];state.todos[idx+1]=state.todos[idx];state.todos[idx]=tmp;saveState();renderList();}};
+      const del=document.createElement('button');del.className='todo-del';del.textContent='✕';
       del.onclick=()=>{state.todos=state.todos.filter(x=>x.id!==todo.id);saveState();renderList();};
-      const moveWrap=document.createElement('div');moveWrap.style.cssText='display:flex;flex-direction:column;gap:2px;';moveWrap.appendChild(moveUp);moveWrap.appendChild(moveDown);item.appendChild(chk);item.appendChild(txt);item.appendChild(moveWrap);item.appendChild(del);
+      const moveWrap=document.createElement('div');moveWrap.style.cssText='display:flex;flex-direction:column;gap:2px;';
+      moveWrap.appendChild(moveUp);moveWrap.appendChild(moveDown);
+      item.appendChild(chk);item.appendChild(txt);item.appendChild(moveWrap);item.appendChild(del);
       list.appendChild(item);
     });
   }
@@ -203,54 +179,35 @@ function renderTodoPage(){
     state.todos.unshift({id:Date.now(),text,done:false});
     inp.value='';saveState();renderList();
   }
-  addBtn.onclick=addTodo;
-  inp.onkeydown=e=>{if(e.key==='Enter')addTodo();};
-  renderList();
-  wrap.appendChild(list);
-  div.appendChild(wrap);
-  return div;
+  addBtn.onclick=addTodo;inp.onkeydown=e=>{if(e.key==='Enter')addTodo();};
+  renderList();wrap.appendChild(list);div.appendChild(wrap);return div;
 }
 
 function renderTrackerPage(pg,pi,ai){
   const pageDiv=document.createElement('div');
   pageDiv.className='page'+(pi===ai?' active':'');
 
-  const nameRow=document.createElement('div');
-  nameRow.className='page-name-row';
-  const nameInp=document.createElement('input');
-  nameInp.type='text';nameInp.className='page-name-input';
+  const nameRow=document.createElement('div');nameRow.className='page-name-row';
+  const nameInp=document.createElement('input');nameInp.type='text';nameInp.className='page-name-input';
   nameInp.placeholder='ページ名';nameInp.value=pg.name;
   nameInp.oninput=e=>{pg.name=e.target.value;document.querySelectorAll('.tab')[pi].textContent=e.target.value;saveState();};
   nameRow.appendChild(nameInp);
-  // 左右入れ替えボタン
+
   const trackerIdxs=state.pages.map((p,i)=>p.type!=='todo'?i:-1).filter(i=>i>=0);
   const myTrackerPos=trackerIdxs.indexOf(pi);
   if(myTrackerPos>0){
-    const leftBtn=document.createElement('button');leftBtn.className='del-page-btn';leftBtn.textContent='◀';leftBtn.title='左へ';
-    leftBtn.onclick=()=>{
-      const prevIdx=trackerIdxs[myTrackerPos-1];
-      const tmp=state.pages[pi];state.pages[pi]=state.pages[prevIdx];state.pages[prevIdx]=tmp;
-      state.activePage=prevIdx;saveState();render();
-    };
+    const leftBtn=document.createElement('button');leftBtn.className='del-page-btn';leftBtn.textContent='◀';
+    leftBtn.onclick=()=>{const prevIdx=trackerIdxs[myTrackerPos-1];const tmp=state.pages[pi];state.pages[pi]=state.pages[prevIdx];state.pages[prevIdx]=tmp;state.activePage=prevIdx;saveState();render();};
     nameRow.appendChild(leftBtn);
   }
   if(myTrackerPos<trackerIdxs.length-1){
-    const rightBtn=document.createElement('button');rightBtn.className='del-page-btn';rightBtn.textContent='▶';rightBtn.title='右へ';
-    rightBtn.onclick=()=>{
-      const nextIdx=trackerIdxs[myTrackerPos+1];
-      const tmp=state.pages[pi];state.pages[pi]=state.pages[nextIdx];state.pages[nextIdx]=tmp;
-      state.activePage=nextIdx;saveState();render();
-    };
+    const rightBtn=document.createElement('button');rightBtn.className='del-page-btn';rightBtn.textContent='▶';
+    rightBtn.onclick=()=>{const nextIdx=trackerIdxs[myTrackerPos+1];const tmp=state.pages[pi];state.pages[pi]=state.pages[nextIdx];state.pages[nextIdx]=tmp;state.activePage=nextIdx;saveState();render();};
     nameRow.appendChild(rightBtn);
   }
-  if(state.pages.filter(p=>p.type!=='todo').length>1){
+  if(trackerIdxs.length>1){
     const delBtn=document.createElement('button');delBtn.className='del-page-btn';delBtn.textContent='削除';
-    delBtn.onclick=()=>{
-      if(!confirm(`「${pg.name}」を削除しますか？`))return;
-      state.pages.splice(pi,1);
-      if(state.activePage>=state.pages.length)state.activePage=state.pages.length-1;
-      saveState();render();
-    };
+    delBtn.onclick=()=>{if(!confirm(`「${pg.name}」を削除しますか？`))return;state.pages.splice(pi,1);if(state.activePage>=state.pages.length)state.activePage=state.pages.length-1;saveState();render();};
     nameRow.appendChild(delBtn);
   }
   pageDiv.appendChild(nameRow);
@@ -258,106 +215,68 @@ function renderTrackerPage(pg,pi,ai){
   const dates=getDates();
   const groups=groupByMonth(dates);
   const todayMonth=`${new Date().getFullYear()}-${String(new Date().getMonth()+1).padStart(2,'0')}`;
-
-  const grid=document.createElement('div');
-  grid.className='grid';
+  const grid=document.createElement('div');grid.className='grid';
 
   [0,1].forEach(ci=>{
     const col=document.createElement('div');col.className='col';
     const head=document.createElement('div');head.className='col-head';
     const icon=document.createElement('div');icon.className='col-icon';
     icon.textContent=pg.icons?.[ci]||'📋';
-    icon.onclick=()=>{
-      const e=prompt('絵文字を入力:',pg.icons?.[ci]||'📋');
-      if(e){if(!pg.icons)pg.icons=['📋','📋'];pg.icons[ci]=e.trim().slice(0,2);saveState();render();}
-    };
+    icon.onclick=()=>{const e=prompt('絵文字を入力:',pg.icons?.[ci]||'📋');if(e){if(!pg.icons)pg.icons=['📋','📋'];pg.icons[ci]=e.trim().slice(0,2);saveState();render();}};
     head.appendChild(icon);
-    const titleInp=document.createElement('input');
-    titleInp.type='text';titleInp.className='col-title-input';
+    const titleInp=document.createElement('input');titleInp.type='text';titleInp.className='col-title-input';
     titleInp.placeholder='項目名…';titleInp.value=pg.cols[ci]||'';
     titleInp.oninput=e=>{pg.cols[ci]=e.target.value;saveState();};
-    head.appendChild(titleInp);
-    col.appendChild(head);
+    head.appendChild(titleInp);col.appendChild(head);
 
-    // 月グループ
-    Object.entries(groups).reverse().forEach(([monthKey, monthDates])=>{
+    Object.entries(groups).reverse().forEach(([monthKey,monthDates])=>{
       const isCurrent=(monthKey===todayMonth);
       const openKey=`${pg.id}_${ci}_${monthKey}`;
-      if(state.openMonths[openKey]===undefined) state.openMonths[openKey]=isCurrent;
+      if(state.openMonths[openKey]===undefined)state.openMonths[openKey]=isCurrent;
       const isOpen=state.openMonths[openKey];
-
       const group=document.createElement('div');group.className='month-group';
-
       const mhdr=document.createElement('div');mhdr.className='month-header';
       const [y,m]=monthKey.split('-');
-      const mlabel=document.createElement('span');
-      mlabel.className='month-label'+(isCurrent?' current':'');
+      const mlabel=document.createElement('span');mlabel.className='month-label'+(isCurrent?' current':'');
       mlabel.textContent=`${y}年${parseInt(m)}月`;
-      const marrow=document.createElement('span');
-      marrow.className='month-arrow'+(isOpen?' open':'');
-      marrow.textContent='▼';
+      const marrow=document.createElement('span');marrow.className='month-arrow'+(isOpen?' open':'');marrow.textContent='▼';
       mhdr.appendChild(mlabel);mhdr.appendChild(marrow);
+      const mdates=document.createElement('div');mdates.className='month-dates'+(isOpen?' open':'');
+      mhdr.onclick=()=>{const nowOpen=mdates.classList.contains('open');mdates.classList.toggle('open',!nowOpen);marrow.classList.toggle('open',!nowOpen);state.openMonths[openKey]=!nowOpen;saveState();};
 
-      const mdates=document.createElement('div');
-      mdates.className='month-dates'+(isOpen?' open':'');
-
-      mhdr.onclick=()=>{
-        const nowOpen=mdates.classList.contains('open');
-        mdates.classList.toggle('open',!nowOpen);
-        marrow.classList.toggle('open',!nowOpen);
-        state.openMonths[openKey]=!nowOpen;
-        saveState();
-      };
-
-      // 月内の日付（新しい順）
       [...monthDates].reverse().forEach(d=>{
         const today=new Date();today.setHours(0,0,0,0);
-        const isPast=d<today;
-        const isFuture=d>today;
-        const isTodayFlag=isToday(d);
-        const dow=d.getDay();
-
+        const isPast=d<today;const isFuture=d>today;const isTodayFlag=isToday(d);const dow=d.getDay();
         const row=document.createElement('div');
         row.className='date-row'+(isTodayFlag?' today':isFuture?' future':'');
-        if(isTodayFlag && ci===0) todayEl=row;
-
+        if(isTodayFlag&&ci===0)todayEl=row;
         const info=document.createElement('div');info.className='date-info';
         const mdSpan=document.createElement('div');
         let mdClass='date-md';
         if(dow===6)mdClass+=' sat';
         else if(dow===0)mdClass+=' sun';
-        else if(isPast)mdClass+=' past';
         mdSpan.className=mdClass;
         mdSpan.innerHTML=`${d.getMonth()+1}/${d.getDate()}（${DAYS[dow]}）${isTodayFlag?'<span class="today-badge">今日</span>':''}`;
-        info.appendChild(mdSpan);
-        row.appendChild(info);
-
+        info.appendChild(mdSpan);row.appendChild(info);
         const key=checkKey(pg.id,ci,ds(d));
-        const btn=document.createElement('button');
-        btn.className='check-btn'+(state.checks[key]?' done':'');
+        const btn=document.createElement('button');btn.className='check-btn'+(state.checks[key]?' done':'');
         btn.onclick=()=>{state.checks[key]=!state.checks[key];btn.classList.toggle('done');saveState();};
-        row.appendChild(btn);
-        mdates.appendChild(row);
+        row.appendChild(btn);mdates.appendChild(row);
       });
 
-      group.appendChild(mhdr);
-      group.appendChild(mdates);
-      col.appendChild(group);
+      group.appendChild(mhdr);group.appendChild(mdates);col.appendChild(group);
     });
-
     grid.appendChild(col);
   });
 
-  pageDiv.appendChild(grid);
-  return pageDiv;
+  pageDiv.appendChild(grid);return pageDiv;
 }
 
 function render(){
   const tabsEl=document.getElementById('tabs');
   const pagesEl=document.getElementById('pages');
   tabsEl.innerHTML='';pagesEl.innerHTML='';
-  todayEl=null;
-
+  todayEl=null;activePageEl=null;
   const ai=state.activePage??0;
 
   state.pages.forEach((pg,pi)=>{
@@ -368,8 +287,7 @@ function render(){
     tabsEl.appendChild(btn);
   });
 
-  const addBtn=document.createElement('button');
-  addBtn.className='tab-add';addBtn.textContent='＋';
+  const addBtn=document.createElement('button');addBtn.className='tab-add';addBtn.textContent='＋';
   addBtn.onclick=()=>{
     const id=Date.now();
     const trackerPages=state.pages.filter(p=>p.type!=='todo');
@@ -377,24 +295,17 @@ function render(){
     const nums=['①','②','③','④','⑤','⑥','⑦','⑧','⑨','⑩'];
     const name='日課'+(nums[nextNum-1]||nextNum);
     let insertIdx=state.pages.length;
-    for(let i=state.pages.length-1;i>=0;i--){
-      if(state.pages[i].type!=='todo'){insertIdx=i+1;break;}
-    }
+    for(let i=state.pages.length-1;i>=0;i--){if(state.pages[i].type!=='todo'){insertIdx=i+1;break;}}
     state.pages.splice(insertIdx,0,{id,name,cols:['',''],icons:[ICONS[trackerPages.length%ICONS.length],'⭐']});
-    state.activePage=insertIdx;
-    saveState();render();
+    state.activePage=insertIdx;saveState();render();
   };
   tabsEl.appendChild(addBtn);
 
   state.pages.forEach((pg,pi)=>{
     let pageDiv;
-    if(pg.type==='todo'){
-      pageDiv=renderTodoPage();
-      pageDiv.className='page'+(pi===ai?' active':'');
-    } else {
-      pageDiv=renderTrackerPage(pg,pi,ai);
-    }
-    if(pi===ai) activePageEl=pageDiv;
+    if(pg.type==='todo'){pageDiv=renderTodoPage();pageDiv.className='page'+(pi===ai?' active':'');}
+    else{pageDiv=renderTrackerPage(pg,pi,ai);}
+    if(pi===ai)activePageEl=pageDiv;
     pagesEl.appendChild(pageDiv);
   });
 

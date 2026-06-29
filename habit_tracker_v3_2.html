@@ -17,7 +17,7 @@ body{display:flex;flex-direction:column;max-width:600px;margin:0 auto;min-height
 .header{background:#fff;border-bottom:1px solid #e8e8e4;padding:12px 16px 0;position:sticky;top:0;z-index:10}
 .header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .header-title{font-size:17px;font-weight:600;color:#1a1a18}
-.today-btn{padding:6px 14px;background:#fff8e0;border:1px solid #e8c84a;border-radius:20px;font-size:12px;font-weight:600;color:#b07d00;cursor:pointer}
+.today-btn{padding:8px 18px;background:#1a6fd4;border:none;border-radius:20px;font-size:14px;font-weight:600;color:#fff;cursor:pointer}
 .tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
 .tab{padding:8px 14px;border-radius:10px 10px 0 0;font-size:13px;font-weight:500;border:1px solid transparent;border-bottom:none;cursor:pointer;white-space:nowrap;color:#888;background:transparent;transition:all .15s}
@@ -41,7 +41,7 @@ body{display:flex;flex-direction:column;max-width:600px;margin:0 auto;min-height
 .month-header{display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:#f5f5f2;cursor:pointer;user-select:none}
 .month-header:active{background:#eeeeea}
 .month-label{font-size:12px;font-weight:600;color:#666}
-.month-label.current{color:#b07d00}
+.month-label.current{color:#1a6fd4}
 .month-arrow{font-size:11px;color:#aaa;transition:transform .2s}
 .month-arrow.open{transform:rotate(180deg)}
 .month-dates{display:none}
@@ -53,20 +53,20 @@ body{display:flex;flex-direction:column;max-width:600px;margin:0 auto;min-height
 .date-row.today{background:#e8f0ff}
 .date-row.future{opacity:0.65}
 .date-info{flex:1;min-width:0}
-.date-md{font-size:15px;color:#333;font-weight:400;white-space:nowrap}
+.date-md{font-size:15px;color:#000;font-weight:400;white-space:nowrap}
 .date-md.sat{color:#2255cc;font-weight:400}
 .date-md.sun{color:#cc2222;font-weight:400}
-.date-md.past{color:#aaa;font-weight:400;font-size:13px}.date-row.today .date-md{font-weight:700}
+.date-md.past{color:#000;font-weight:400;font-size:15px}
 .date-dow{font-size:11px;color:#bbb;margin-top:1px}
-.today-badge{display:inline-block;font-size:10px;background:#fff3cd;color:#b07d00;border-radius:4px;padding:1px 6px;margin-left:5px;font-weight:600;vertical-align:middle}
+.today-badge{display:inline-block;font-size:11px;background:#1a6fd4;color:#fff;border-radius:4px;padding:2px 8px;margin-left:6px;font-weight:600;vertical-align:middle}
 .check-btn{width:32px;height:32px;border-radius:8px;border:1.5px solid #d0d0cc;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .12s;position:relative}
 .check-btn.done{background:#34c759;border-color:#34c759}
 .check-btn.done::after{content:'';display:block;width:8px;height:13px;border:2.5px solid #fff;border-top:none;border-left:none;transform:rotate(45deg) translate(-1px,-1px)}
 
 /* ページ名 */
 .page-name-row{display:flex;align-items:center;margin-bottom:10px;gap:8px}
-.page-name-input{font-size:14px;font-weight:600;color:#555;background:transparent;border:none;outline:none;flex:1}
-.del-page-btn{font-size:11px;color:#ddd;background:transparent;border:none;cursor:pointer;padding:4px 6px}
+.page-name-input{font-size:18px;font-weight:600;color:#333;background:transparent;border:none;outline:none;flex:1}
+.del-page-btn{font-size:14px;color:#333;background:transparent;border:none;cursor:pointer;padding:4px 6px;font-weight:500}
 
 /* やることリスト */
 .todo-wrap{background:#fff;border-radius:14px;border:1px solid #e8e8e4;overflow:hidden}
@@ -82,9 +82,9 @@ body{display:flex;flex-direction:column;max-width:600px;margin:0 auto;min-height
 .todo-check{width:24px;height:24px;border-radius:6px;border:1.5px solid #c0b0e0;background:transparent;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .12s;position:relative}
 .todo-check.done{background:#8a6fbf;border-color:#8a6fbf}
 .todo-check.done::after{content:'';display:block;width:6px;height:10px;border:2px solid #fff;border-top:none;border-left:none;transform:rotate(45deg) translate(-1px,-1px)}
-.todo-text{flex:1;font-size:16px;color:#333;word-break:break-all}
+.todo-text{flex:1;font-size:16px;color:#000;word-break:break-all}
 .todo-text.done{color:#aaa;text-decoration:line-through}
-.todo-del{font-size:16px;color:#ddd;background:transparent;border:none;cursor:pointer;padding:2px 6px}.todo-move{font-size:18px;color:#ccc;background:transparent;border:none;cursor:pointer;padding:2px 4px;line-height:1}.todo-move:active{color:#888}
+.todo-del{font-size:16px;color:#333;background:transparent;border:none;cursor:pointer;padding:2px 6px}.todo-move{font-size:18px;color:#333;background:transparent;border:none;cursor:pointer;padding:2px 4px;line-height:1}.todo-move:active{color:#888}
 .todo-del:active{color:#e04040}
 .todo-empty{padding:24px;text-align:center;font-size:13px;color:#ccc}
 </style>
@@ -148,9 +148,15 @@ function checkKey(pgId,ci,dateStr){return `${pgId}_${ci}_${dateStr}`;}
 
 let state=loadState();
 let todayEl=null;
+let activePageEl=null;
 
 function scrollToToday(){
-  if(todayEl) todayEl.scrollIntoView({block:'center',behavior:'smooth'});
+  if(todayEl && activePageEl){
+    const pageRect=activePageEl.getBoundingClientRect();
+    const rowRect=todayEl.getBoundingClientRect();
+    const offset=rowRect.top - pageRect.top + activePageEl.scrollTop - (activePageEl.clientHeight/2) + (rowRect.height/2);
+    activePageEl.scrollTo({top:offset, behavior:'smooth'});
+  }
 }
 
 function renderTodoPage(){
@@ -216,6 +222,27 @@ function renderTrackerPage(pg,pi,ai){
   nameInp.placeholder='ページ名';nameInp.value=pg.name;
   nameInp.oninput=e=>{pg.name=e.target.value;document.querySelectorAll('.tab')[pi].textContent=e.target.value;saveState();};
   nameRow.appendChild(nameInp);
+  // 左右入れ替えボタン
+  const trackerIdxs=state.pages.map((p,i)=>p.type!=='todo'?i:-1).filter(i=>i>=0);
+  const myTrackerPos=trackerIdxs.indexOf(pi);
+  if(myTrackerPos>0){
+    const leftBtn=document.createElement('button');leftBtn.className='del-page-btn';leftBtn.textContent='◀';leftBtn.title='左へ';
+    leftBtn.onclick=()=>{
+      const prevIdx=trackerIdxs[myTrackerPos-1];
+      const tmp=state.pages[pi];state.pages[pi]=state.pages[prevIdx];state.pages[prevIdx]=tmp;
+      state.activePage=prevIdx;saveState();render();
+    };
+    nameRow.appendChild(leftBtn);
+  }
+  if(myTrackerPos<trackerIdxs.length-1){
+    const rightBtn=document.createElement('button');rightBtn.className='del-page-btn';rightBtn.textContent='▶';rightBtn.title='右へ';
+    rightBtn.onclick=()=>{
+      const nextIdx=trackerIdxs[myTrackerPos+1];
+      const tmp=state.pages[pi];state.pages[pi]=state.pages[nextIdx];state.pages[nextIdx]=tmp;
+      state.activePage=nextIdx;saveState();render();
+    };
+    nameRow.appendChild(rightBtn);
+  }
   if(state.pages.filter(p=>p.type!=='todo').length>1){
     const delBtn=document.createElement('button');delBtn.className='del-page-btn';delBtn.textContent='削除';
     delBtn.onclick=()=>{
@@ -345,8 +372,16 @@ function render(){
   addBtn.className='tab-add';addBtn.textContent='＋';
   addBtn.onclick=()=>{
     const id=Date.now();
-    state.pages.splice(state.pages.length-1,0,{id,name:'日課',cols:['',''],icons:[ICONS[state.pages.length%ICONS.length],'⭐']});
-    state.activePage=state.pages.length-2;
+    const trackerPages=state.pages.filter(p=>p.type!=='todo');
+    const nextNum=trackerPages.length+1;
+    const nums=['①','②','③','④','⑤','⑥','⑦','⑧','⑨','⑩'];
+    const name='日課'+(nums[nextNum-1]||nextNum);
+    let insertIdx=state.pages.length;
+    for(let i=state.pages.length-1;i>=0;i--){
+      if(state.pages[i].type!=='todo'){insertIdx=i+1;break;}
+    }
+    state.pages.splice(insertIdx,0,{id,name,cols:['',''],icons:[ICONS[trackerPages.length%ICONS.length],'⭐']});
+    state.activePage=insertIdx;
     saveState();render();
   };
   tabsEl.appendChild(addBtn);
@@ -359,6 +394,7 @@ function render(){
     } else {
       pageDiv=renderTrackerPage(pg,pi,ai);
     }
+    if(pi===ai) activePageEl=pageDiv;
     pagesEl.appendChild(pageDiv);
   });
 

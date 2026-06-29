@@ -12,262 +12,327 @@
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;background:#f7f7f5;font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Yu Gothic',sans-serif}
 body{display:flex;flex-direction:column;max-width:600px;margin:0 auto;min-height:100dvh}
-
-/* header */
 .header{background:#fff;border-bottom:1px solid #e8e8e4;padding:12px 16px 0;position:sticky;top:0;z-index:10}
-.header-title{font-size:17px;font-weight:600;color:#1a1a18;margin-bottom:10px}
+.header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.header-title{font-size:17px;font-weight:600;color:#1a1a18}
+.today-btn{padding:6px 14px;background:#fff8e0;border:1px solid #e8c84a;border-radius:20px;font-size:12px;font-weight:600;color:#b07d00;cursor:pointer}
 .tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:0;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
-.tab{padding:8px 14px;border-radius:10px 10px 0 0;font-size:13px;font-weight:500;border:none;cursor:pointer;white-space:nowrap;color:#888;background:transparent;border:1px solid transparent;border-bottom:none;transition:all .15s}
+.tab{padding:8px 14px;border-radius:10px 10px 0 0;font-size:13px;font-weight:500;border:1px solid transparent;border-bottom:none;cursor:pointer;white-space:nowrap;color:#888;background:transparent;transition:all .15s}
 .tab.active{background:#fff;color:#1a1a18;border-color:#e8e8e4;border-bottom-color:#fff;margin-bottom:-1px;z-index:1}
 .tab-add{padding:8px 12px;font-size:13px;color:#aaa;background:transparent;border:none;cursor:pointer}
-
-/* page */
 .pages{flex:1;overflow:hidden}
-.page{display:none;padding:14px 12px;height:100%}
+.page{display:none;padding:14px 12px}
 .page.active{display:block}
-
-/* grid */
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .col{background:#fff;border-radius:14px;border:1px solid #e8e8e4;overflow:hidden}
 .col-head{padding:10px 12px;border-bottom:1px solid #f0f0ec;display:flex;align-items:center;gap:6px}
-.col-icon{width:28px;height:28px;border-radius:8px;background:#e8f4ee;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.col-icon{width:28px;height:28px;border-radius:8px;background:#e8f4ee;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;cursor:pointer}
 .col-title-input{font-size:13px;font-weight:600;color:#1a1a18;background:transparent;border:none;outline:none;width:100%;min-width:0}
 .col-title-input::placeholder{color:#ccc;font-weight:400}
-
-.dates-scroll{max-height:55vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.dates-scroll{max-height:58vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .date-row{display:flex;align-items:center;justify-content:space-between;padding:9px 14px;border-bottom:1px solid #f5f5f2}
 .date-row:last-child{border-bottom:none}
 .date-row.today{background:#fffbf0}
+.date-row.future{opacity:0.7}
 .date-info{flex:1;min-width:0}
 .date-md{font-size:15px;color:#333;font-weight:600;white-space:nowrap}
+.date-md.sat{color:#2255cc}
+.date-md.sun{color:#cc2222}
+.date-md.past{color:#aaa;font-weight:400}
+.date-md.future-color{color:#555}
 .date-dow{font-size:12px;color:#aaa;margin-top:2px}
 .today-badge{display:inline-block;font-size:10px;background:#fff3cd;color:#b07d00;border-radius:4px;padding:1px 6px;margin-left:5px;font-weight:600;vertical-align:middle}
-.sat{color:#3a7de0}
-.sun{color:#e04040}
-
-.check-btn{width:30px;height:30px;border-radius:8px;border:1.5px solid #d0d0cc;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .12s;position:relative}
+.check-btn{width:32px;height:32px;border-radius:8px;border:1.5px solid #d0d0cc;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .12s;position:relative}
 .check-btn.done{background:#34c759;border-color:#34c759}
 .check-btn.done::after{content:'';display:block;width:8px;height:13px;border:2.5px solid #fff;border-top:none;border-left:none;transform:rotate(45deg) translate(-1px,-1px)}
-
-/* page name edit */
 .page-name-row{display:flex;align-items:center;margin-bottom:10px;gap:8px}
 .page-name-input{font-size:14px;font-weight:600;color:#555;background:transparent;border:none;outline:none;flex:1}
-.page-name-input:focus{color:#1a1a18}
 .del-page-btn{font-size:11px;color:#ddd;background:transparent;border:none;cursor:pointer;padding:4px 6px}
-.del-page-btn:active{color:#e04040}
 
-/* scroll hint */
-.scroll-hint{text-align:center;padding:6px;font-size:10px;color:#ccc}
-
-/* install tip */
-.install-tip{background:#eef6ff;border:1px solid #c5deff;border-radius:10px;padding:10px 12px;margin:0 12px 12px;font-size:12px;color:#3a7de0;line-height:1.5}
-.install-tip strong{display:block;margin-bottom:2px;font-size:13px}
-.install-tip .close-tip{float:right;background:none;border:none;color:#aaa;font-size:14px;cursor:pointer;margin-top:-2px}
+/* やることリスト */
+.todo-wrap{background:#fff;border-radius:14px;border:1px solid #e8e8e4;overflow:hidden}
+.todo-head{padding:12px 14px;border-bottom:1px solid #f0f0ec;background:#f0ebff;display:flex;align-items:center;gap:8px}
+.todo-head-title{font-size:14px;font-weight:600;color:#3a1a6c}
+.todo-add-row{display:flex;gap:8px;padding:10px 12px;border-bottom:1px solid #f5f5f2}
+.todo-input{flex:1;font-size:13px;padding:8px 10px;border:1px solid #e0e0e0;border-radius:8px;outline:none;background:#f9f9f8}
+.todo-input:focus{border-color:#8a6fbf}
+.todo-add-btn{padding:8px 14px;background:#8a6fbf;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer}
+.todo-list{max-height:60vh;overflow-y:auto}
+.todo-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid #f5f5f2}
+.todo-item:last-child{border-bottom:none}
+.todo-check{width:24px;height:24px;border-radius:6px;border:1.5px solid #c0b0e0;background:transparent;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .12s}
+.todo-check.done{background:#8a6fbf;border-color:#8a6fbf}
+.todo-check.done::after{content:'';display:block;width:6px;height:10px;border:2px solid #fff;border-top:none;border-left:none;transform:rotate(45deg) translate(-1px,-1px)}
+.todo-text{flex:1;font-size:13px;color:#333;word-break:break-all}
+.todo-text.done{color:#aaa;text-decoration:line-through}
+.todo-del{font-size:16px;color:#ddd;background:transparent;border:none;cursor:pointer;padding:2px 4px}
+.todo-del:active{color:#e04040}
+.todo-empty{padding:24px;text-align:center;font-size:13px;color:#ccc}
 </style>
 </head>
 <body>
-
 <div class="header">
-  <div class="header-title">習慣トラッカー</div>
+  <div class="header-top">
+    <div class="header-title">習慣トラッカー</div>
+    <button class="today-btn" id="today-btn">▶ 今日</button>
+  </div>
   <div class="tabs" id="tabs"></div>
 </div>
-
-<div id="install-tip" class="install-tip" style="display:none;margin-top:12px">
-  <button class="close-tip" onclick="closeTip()">✕</button>
-  <strong>ホーム画面に追加できます</strong>
-  iPhone: Safari で開いて「共有 → ホーム画面に追加」<br>
-  Android: Chrome で「メニュー → ホーム画面に追加」
-</div>
-
 <div class="pages" id="pages"></div>
 
 <script>
 const DAYS=['日','月','火','水','木','金','土'];
 const ICONS=['🧹','🦷','💊','🏃','📚','💧','🛏️','✍️','🧘','🍳'];
 
-let state = loadState();
-
 function loadState(){
-  try{
-    const s=localStorage.getItem('habit_tracker_v1');
-    if(s) return JSON.parse(s);
-  }catch(e){}
+  try{const s=localStorage.getItem('habit_v3');if(s)return JSON.parse(s);}catch(e){}
   return {
     activePage:0,
     pages:[
-      {id:1,name:'ページ 1',cols:['お風呂掃除','糸ようじ'],icons:['🧹','🦷']},
-      {id:2,name:'ページ 2',cols:['',''],icons:['💊','🏃']}
+      {id:'todo',name:'やること',type:'todo'},
+      {id:1,name:'日課①',cols:['お風呂掃除','糸ようじ'],icons:['🧹','🦷']},
+      {id:2,name:'日課②',cols:['',''],icons:['💊','🏃']}
     ],
-    checks:{}
+    checks:{},
+    todos:[]
   };
 }
 
-function saveState(){
-  try{ localStorage.setItem('habit_tracker_v1',JSON.stringify(state)); }catch(e){}
-}
+function saveState(){try{localStorage.setItem('habit_v3',JSON.stringify(state));}catch(e){}}
 
-function getDates(n=25){
+function getDates(){
   const arr=[];
   const today=new Date();
-  for(let i=n-1;i>=0;i--){
+  today.setHours(0,0,0,0);
+  for(let i=-30;i<=30;i++){
     const d=new Date(today);
-    d.setDate(today.getDate()-i);
+    d.setDate(today.getDate()+i);
     arr.push(d);
   }
   return arr;
 }
 
-function ds(d){ return d.toISOString().slice(0,10); }
-function isToday(d){ return ds(d)===ds(new Date()); }
-function checkKey(pgId,ci,dateStr){ return `${pgId}_${ci}_${dateStr}`; }
+function ds(d){return d.toISOString().slice(0,10);}
+function isToday(d){return ds(d)===ds(new Date());}
+function checkKey(pgId,ci,dateStr){return `${pgId}_${ci}_${dateStr}`;}
+
+let state=loadState();
+let activeScrollEls=[];
+
+function scrollToToday(){
+  activeScrollEls.forEach(el=>{
+    const todayRow=el.querySelector('.today');
+    if(todayRow) todayRow.scrollIntoView({block:'center',behavior:'smooth'});
+  });
+}
+
+function renderTodoPage(pg){
+  const div=document.createElement('div');
+  div.className='page';
+
+  const wrap=document.createElement('div');
+  wrap.className='todo-wrap';
+
+  // ヘッダー
+  const head=document.createElement('div');
+  head.className='todo-head';
+  head.innerHTML=`<span style="font-size:18px">📝</span><span class="todo-head-title">やることリスト</span>`;
+  wrap.appendChild(head);
+
+  // 入力行
+  const addRow=document.createElement('div');
+  addRow.className='todo-add-row';
+  const inp=document.createElement('input');
+  inp.type='text';inp.className='todo-input';inp.placeholder='タスクを入力…';
+  const addBtn=document.createElement('button');
+  addBtn.className='todo-add-btn';addBtn.textContent='追加';
+  addRow.appendChild(inp);addRow.appendChild(addBtn);
+  wrap.appendChild(addRow);
+
+  // リスト
+  const list=document.createElement('div');
+  list.className='todo-list';
+
+  function renderList(){
+    list.innerHTML='';
+    if(!state.todos||state.todos.length===0){
+      list.innerHTML='<div class="todo-empty">タスクがありません</div>';
+      return;
+    }
+    // 未完了→完了の順
+    const sorted=[...state.todos.filter(t=>!t.done),...state.todos.filter(t=>t.done)];
+    sorted.forEach(todo=>{
+      const item=document.createElement('div');
+      item.className='todo-item';
+      const chk=document.createElement('button');
+      chk.className='todo-check'+(todo.done?' done':'');
+      chk.onclick=()=>{
+        const t=state.todos.find(x=>x.id===todo.id);
+        if(t){t.done=!t.done;saveState();renderList();}
+      };
+      const txt=document.createElement('div');
+      txt.className='todo-text'+(todo.done?' done':'');
+      txt.textContent=todo.text;
+      const del=document.createElement('button');
+      del.className='todo-del';del.textContent='✕';
+      del.onclick=()=>{
+        state.todos=state.todos.filter(x=>x.id!==todo.id);
+        saveState();renderList();
+      };
+      item.appendChild(chk);item.appendChild(txt);item.appendChild(del);
+      list.appendChild(item);
+    });
+  }
+
+  function addTodo(){
+    const text=inp.value.trim();
+    if(!text)return;
+    if(!state.todos)state.todos=[];
+    state.todos.unshift({id:Date.now(),text,done:false});
+    inp.value='';saveState();renderList();
+  }
+
+  addBtn.onclick=addTodo;
+  inp.onkeydown=e=>{if(e.key==='Enter')addTodo();};
+
+  renderList();
+  wrap.appendChild(list);
+  div.appendChild(wrap);
+  return div;
+}
 
 function render(){
   const tabsEl=document.getElementById('tabs');
   const pagesEl=document.getElementById('pages');
-  tabsEl.innerHTML='';
-  pagesEl.innerHTML='';
+  tabsEl.innerHTML='';pagesEl.innerHTML='';
+  activeScrollEls=[];
 
   state.pages.forEach((pg,pi)=>{
     const btn=document.createElement('button');
     btn.className='tab'+(pi===state.activePage?' active':'');
     btn.textContent=pg.name||`ページ ${pi+1}`;
-    btn.onclick=()=>{ state.activePage=pi; saveState(); render(); };
+    btn.onclick=()=>{state.activePage=pi;saveState();render();};
     tabsEl.appendChild(btn);
   });
 
   const addBtn=document.createElement('button');
-  addBtn.className='tab-add';
-  addBtn.textContent='＋';
+  addBtn.className='tab-add';addBtn.textContent='＋';
   addBtn.onclick=()=>{
     const id=Date.now();
-    state.pages.push({id,name:`ページ ${state.pages.length+1}`,cols:['',''],icons:[ICONS[state.pages.length%ICONS.length],'⭐']});
-    state.activePage=state.pages.length-1;
-    saveState(); render();
+    state.pages.splice(state.pages.length-1,0,{id,name:`日課③`,cols:['',''],icons:[ICONS[state.pages.length%ICONS.length],'⭐']});
+    state.activePage=state.pages.length-2;
+    saveState();render();
   };
   tabsEl.appendChild(addBtn);
 
-  const dates=getDates(25);
+  const dates=getDates();
+  const ai=state.activePage??0;
 
   state.pages.forEach((pg,pi)=>{
-    const pageDiv=document.createElement('div');
-    pageDiv.className='page'+(pi===state.activePage?' active':'');
+    let pageDiv;
+    if(pg.type==='todo'){
+      pageDiv=renderTodoPage(pg);
+    } else {
+      pageDiv=document.createElement('div');
+      pageDiv.className='page';
 
-    // page name row
-    const nameRow=document.createElement('div');
-    nameRow.className='page-name-row';
-    const nameInp=document.createElement('input');
-    nameInp.type='text'; nameInp.className='page-name-input';
-    nameInp.placeholder=`ページ ${pi+1}`;
-    nameInp.value=pg.name;
-    nameInp.oninput=e=>{
-      pg.name=e.target.value||`ページ ${pi+1}`;
-      document.querySelectorAll('.tab')[pi].textContent=pg.name;
-      saveState();
-    };
-    nameRow.appendChild(nameInp);
-    if(state.pages.length>1){
-      const delBtn=document.createElement('button');
-      delBtn.className='del-page-btn';
-      delBtn.textContent='削除';
-      delBtn.onclick=()=>{
-        if(!confirm(`「${pg.name}」を削除しますか？`)) return;
-        state.pages.splice(pi,1);
-        if(state.activePage>=state.pages.length) state.activePage=state.pages.length-1;
-        saveState(); render();
-      };
-      nameRow.appendChild(delBtn);
-    }
-    pageDiv.appendChild(nameRow);
-
-    // grid
-    const grid=document.createElement('div');
-    grid.className='grid';
-
-    [0,1].forEach(ci=>{
-      const col=document.createElement('div');
-      col.className='col';
-
-      // col header
-      const head=document.createElement('div');
-      head.className='col-head';
-      const icon=document.createElement('div');
-      icon.className='col-icon';
-      icon.textContent=pg.icons?.[ci]||'📋';
-      icon.title='タップで絵文字変更';
-      icon.style.cursor='pointer';
-      icon.onclick=()=>{
-        const emoji=prompt('絵文字を入力（1文字）:',pg.icons?.[ci]||'📋');
-        if(emoji){
-          if(!pg.icons) pg.icons=['📋','📋'];
-          pg.icons[ci]=emoji.trim().slice(0,2);
-          saveState(); render();
-        }
-      };
-      head.appendChild(icon);
-      const titleInp=document.createElement('input');
-      titleInp.type='text'; titleInp.className='col-title-input';
-      titleInp.placeholder='項目名…'; titleInp.value=pg.cols[ci]||'';
-      titleInp.oninput=e=>{ pg.cols[ci]=e.target.value; saveState(); };
-      head.appendChild(titleInp);
-      col.appendChild(head);
-
-      // dates
-      const scroll=document.createElement('div');
-      scroll.className='dates-scroll';
-      dates.forEach(d=>{
-        const row=document.createElement('div');
-        row.className='date-row'+(isToday(d)?' today':'');
-        const dow=d.getDay();
-        const info=document.createElement('div');
-        info.className='date-info';
-        const mdSpan=document.createElement('div');
-        mdSpan.className='date-md'+(dow===6?' sat':dow===0?' sun':'');
-        mdSpan.innerHTML=`${d.getMonth()+1}/${d.getDate()}${isToday(d)?'<span class="today-badge">今日</span>':''}`;
-        const dowSpan=document.createElement('div');
-        dowSpan.className='date-dow';
-        dowSpan.textContent=DAYS[dow]+'曜日';
-        info.appendChild(mdSpan);
-        info.appendChild(dowSpan);
-        row.appendChild(info);
-
-        const key=checkKey(pg.id,ci,ds(d));
-        const btn=document.createElement('button');
-        btn.className='check-btn'+(state.checks[key]?' done':'');
-        btn.setAttribute('aria-label',`${d.getMonth()+1}/${d.getDate()} ${pg.cols[ci]||'項目'}`);
-        btn.onclick=()=>{
-          state.checks[key]=!state.checks[key];
-          btn.classList.toggle('done');
-          saveState();
+      const nameRow=document.createElement('div');
+      nameRow.className='page-name-row';
+      const nameInp=document.createElement('input');
+      nameInp.type='text';nameInp.className='page-name-input';
+      nameInp.placeholder=`ページ ${pi+1}`;nameInp.value=pg.name;
+      nameInp.oninput=e=>{pg.name=e.target.value;document.querySelectorAll('.tab')[pi].textContent=e.target.value;saveState();};
+      nameRow.appendChild(nameInp);
+      if(state.pages.filter(p=>p.type!=='todo').length>1){
+        const delBtn=document.createElement('button');
+        delBtn.className='del-page-btn';delBtn.textContent='削除';
+        delBtn.onclick=()=>{
+          if(!confirm(`「${pg.name}」を削除しますか？`))return;
+          state.pages.splice(pi,1);
+          if(state.activePage>=state.pages.length)state.activePage=state.pages.length-1;
+          saveState();render();
         };
-        row.appendChild(btn);
-        scroll.appendChild(row);
+        nameRow.appendChild(delBtn);
+      }
+      pageDiv.appendChild(nameRow);
+
+      const grid=document.createElement('div');
+      grid.className='grid';
+
+      [0,1].forEach(ci=>{
+        const col=document.createElement('div');
+        col.className='col';
+        const head=document.createElement('div');
+        head.className='col-head';
+        const icon=document.createElement('div');
+        icon.className='col-icon';
+        icon.textContent=pg.icons?.[ci]||'📋';
+        icon.onclick=()=>{
+          const emoji=prompt('絵文字を入力:',pg.icons?.[ci]||'📋');
+          if(emoji){if(!pg.icons)pg.icons=['📋','📋'];pg.icons[ci]=emoji.trim().slice(0,2);saveState();render();}
+        };
+        head.appendChild(icon);
+        const titleInp=document.createElement('input');
+        titleInp.type='text';titleInp.className='col-title-input';
+        titleInp.placeholder='項目名…';titleInp.value=pg.cols[ci]||'';
+        titleInp.oninput=e=>{pg.cols[ci]=e.target.value;saveState();};
+        head.appendChild(titleInp);
+        col.appendChild(head);
+
+        const scroll=document.createElement('div');
+        scroll.className='dates-scroll';
+        if(pi===ai) activeScrollEls.push(scroll);
+
+        dates.forEach(d=>{
+          const today=new Date();today.setHours(0,0,0,0);
+          const isPast=d<today;
+          const isFuture=d>today;
+          const row=document.createElement('div');
+          row.className='date-row'+(isToday(d)?' today':isFuture?' future':'');
+          const dow=d.getDay();
+          const info=document.createElement('div');
+          info.className='date-info';
+          const mdSpan=document.createElement('div');
+          let mdClass='date-md';
+          if(dow===6)mdClass+=' sat';
+          else if(dow===0)mdClass+=' sun';
+          else if(isPast)mdClass+=' past';
+          else mdClass+=' future-color';
+          mdSpan.className=mdClass;
+          mdSpan.innerHTML=`${d.getMonth()+1}/${d.getDate()}（${DAYS[dow]}）${isToday(d)?'<span class="today-badge">今日</span>':''}`;
+          const dowSpan=document.createElement('div');
+          dowSpan.className='date-dow';
+          info.appendChild(mdSpan);info.appendChild(dowSpan);
+          row.appendChild(info);
+
+          const key=checkKey(pg.id,ci,ds(d));
+          const btn=document.createElement('button');
+          btn.className='check-btn'+(state.checks[key]?' done':'');
+          btn.onclick=()=>{state.checks[key]=!state.checks[key];btn.classList.toggle('done');saveState();};
+          row.appendChild(btn);
+          scroll.appendChild(row);
+        });
+
+        col.appendChild(scroll);
+        grid.appendChild(col);
       });
-      // scroll to today
-      col.appendChild(scroll);
-      setTimeout(()=>{
-        const rows=scroll.querySelectorAll('.date-row');
-        if(rows.length) rows[rows.length-1].scrollIntoView({block:'end'});
-      },50);
 
-      grid.appendChild(col);
-    });
+      pageDiv.appendChild(grid);
+    }
 
-    pageDiv.appendChild(grid);
+    pageDiv.classList.toggle('active',pi===ai);
     pagesEl.appendChild(pageDiv);
   });
+
+  // 今日ボタン
+  document.getElementById('today-btn').onclick=scrollToToday;
+
+  // 初期表示で今日にスクロール
+  setTimeout(scrollToToday,100);
 }
 
-function closeTip(){
-  document.getElementById('install-tip').style.display='none';
-  localStorage.setItem('hide_install_tip','1');
-}
-
-// show install tip once
-if(!localStorage.getItem('hide_install_tip')){
-  document.getElementById('install-tip').style.display='block';
-}
-
+state.activePage=state.activePage??0;
 render();
 </script>
 </body>

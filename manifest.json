@@ -1,7 +1,7 @@
 {
   "name": "習慣トラッカー",
   "short_name": "習慣",
-  "start_url": "./habit_tracker_1.html",
+  "start_url": "./habit_tracker_v3_2.html"
   "display": "standalone",
   "background_color": "#f7f7f5",
   "theme_color": "#34c759",

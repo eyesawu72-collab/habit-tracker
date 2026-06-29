@@ -30,7 +30,7 @@ body{display:flex;flex-direction:column;max-width:600px;margin:0 auto;min-height
 .col{background:#fff;border-radius:14px;border:1px solid #e8e8e4;overflow:hidden;margin-bottom:0}
 .col-head{padding:10px 12px;border-bottom:1px solid #f0f0ec;display:flex;align-items:center;gap:6px;position:sticky;top:0;background:#fff;z-index:2}
 .col-icon{width:28px;height:28px;border-radius:8px;background:#e8f4ee;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;cursor:pointer}
-.col-title-input{font-size:13px;font-weight:600;color:#1a1a18;background:transparent;border:none;outline:none;width:100%;min-width:0}
+.col-title-input{font-size:16px;font-weight:400;color:#1a1a18;background:transparent;border:none;outline:none;width:100%;min-width:0}
 .col-title-input::placeholder{color:#ccc;font-weight:400}
 
 /* 月グループ */
@@ -48,13 +48,13 @@ body{display:flex;flex-direction:column;max-width:600px;margin:0 auto;min-height
 /* 日付行 */
 .date-row{display:flex;align-items:center;justify-content:space-between;padding:9px 14px;border-bottom:1px solid #f5f5f2}
 .date-row:last-child{border-bottom:none}
-.date-row.today{background:#fffbf0}
+.date-row.today{background:#e8f0ff}
 .date-row.future{opacity:0.65}
 .date-info{flex:1;min-width:0}
-.date-md{font-size:15px;color:#333;font-weight:600;white-space:nowrap}
-.date-md.sat{color:#2255cc}
-.date-md.sun{color:#cc2222}
-.date-md.past{color:#aaa;font-weight:400;font-size:13px}
+.date-md{font-size:15px;color:#333;font-weight:400;white-space:nowrap}
+.date-md.sat{color:#2255cc;font-weight:400}
+.date-md.sun{color:#cc2222;font-weight:400}
+.date-md.past{color:#aaa;font-weight:400;font-size:13px}.date-row.today .date-md{font-weight:700}
 .date-dow{font-size:11px;color:#bbb;margin-top:1px}
 .today-badge{display:inline-block;font-size:10px;background:#fff3cd;color:#b07d00;border-radius:4px;padding:1px 6px;margin-left:5px;font-weight:600;vertical-align:middle}
 .check-btn{width:32px;height:32px;border-radius:8px;border:1.5px solid #d0d0cc;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .12s;position:relative}
@@ -71,7 +71,7 @@ body{display:flex;flex-direction:column;max-width:600px;margin:0 auto;min-height
 .todo-head{padding:12px 14px;border-bottom:1px solid #f0f0ec;background:#f0ebff;display:flex;align-items:center;gap:8px}
 .todo-head-title{font-size:14px;font-weight:600;color:#3a1a6c}
 .todo-add-row{display:flex;gap:8px;padding:10px 12px;border-bottom:1px solid #f5f5f2}
-.todo-input{flex:1;font-size:13px;padding:8px 10px;border:1px solid #e0e0e0;border-radius:8px;outline:none;background:#f9f9f8}
+.todo-input{flex:1;font-size:16px;padding:8px 10px;border:1px solid #e0e0e0;border-radius:8px;outline:none;background:#f9f9f8}
 .todo-input:focus{border-color:#8a6fbf}
 .todo-add-btn{padding:8px 14px;background:#8a6fbf;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer}
 .todo-list{}
@@ -80,9 +80,9 @@ body{display:flex;flex-direction:column;max-width:600px;margin:0 auto;min-height
 .todo-check{width:24px;height:24px;border-radius:6px;border:1.5px solid #c0b0e0;background:transparent;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .12s;position:relative}
 .todo-check.done{background:#8a6fbf;border-color:#8a6fbf}
 .todo-check.done::after{content:'';display:block;width:6px;height:10px;border:2px solid #fff;border-top:none;border-left:none;transform:rotate(45deg) translate(-1px,-1px)}
-.todo-text{flex:1;font-size:13px;color:#333;word-break:break-all}
+.todo-text{flex:1;font-size:16px;color:#333;word-break:break-all}
 .todo-text.done{color:#aaa;text-decoration:line-through}
-.todo-del{font-size:16px;color:#ddd;background:transparent;border:none;cursor:pointer;padding:2px 6px}
+.todo-del{font-size:16px;color:#ddd;background:transparent;border:none;cursor:pointer;padding:2px 6px}.todo-move{font-size:18px;color:#ccc;background:transparent;border:none;cursor:pointer;padding:2px 4px;line-height:1}.todo-move:active{color:#888}
 .todo-del:active{color:#e04040}
 .todo-empty{padding:24px;text-align:center;font-size:13px;color:#ccc}
 </style>
@@ -176,15 +176,15 @@ function renderTodoPage(){
     if(!state.todos||state.todos.length===0){
       list.innerHTML='<div class="todo-empty">タスクがありません</div>';return;
     }
-    const sorted=[...state.todos.filter(t=>!t.done),...state.todos.filter(t=>t.done)];
+    const sorted=state.todos;
     sorted.forEach(todo=>{
       const item=document.createElement('div');item.className='todo-item';
       const chk=document.createElement('button');chk.className='todo-check'+(todo.done?' done':'');
       chk.onclick=()=>{const t=state.todos.find(x=>x.id===todo.id);if(t){t.done=!t.done;saveState();renderList();}};
       const txt=document.createElement('div');txt.className='todo-text'+(todo.done?' done':'');txt.textContent=todo.text;
-      const del=document.createElement('button');del.className='todo-del';del.textContent='✕';
+      const moveUp=document.createElement('button');moveUp.className='todo-move';moveUp.textContent='▲';moveUp.onclick=()=>{const idx=state.todos.findIndex(x=>x.id===todo.id);if(idx>0){const tmp=state.todos[idx-1];state.todos[idx-1]=state.todos[idx];state.todos[idx]=tmp;saveState();renderList();}};const moveDown=document.createElement('button');moveDown.className='todo-move';moveDown.textContent='▼';moveDown.onclick=()=>{const idx=state.todos.findIndex(x=>x.id===todo.id);if(idx<state.todos.length-1){const tmp=state.todos[idx+1];state.todos[idx+1]=state.todos[idx];state.todos[idx]=tmp;saveState();renderList();}};const del=document.createElement('button');del.className='todo-del';del.textContent='✕';
       del.onclick=()=>{state.todos=state.todos.filter(x=>x.id!==todo.id);saveState();renderList();};
-      item.appendChild(chk);item.appendChild(txt);item.appendChild(del);
+      const moveWrap=document.createElement('div');moveWrap.style.cssText='display:flex;flex-direction:column;gap:2px;';moveWrap.appendChild(moveUp);moveWrap.appendChild(moveDown);item.appendChild(chk);item.appendChild(txt);item.appendChild(moveWrap);item.appendChild(del);
       list.appendChild(item);
     });
   }

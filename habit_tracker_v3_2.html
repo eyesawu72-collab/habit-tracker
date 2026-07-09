@@ -27,8 +27,8 @@ body{display:flex;flex-direction:column;max-width:600px;margin:0 auto;min-height
 .page{display:none;padding:14px 12px;overflow-y:auto;max-height:calc(100dvh - 90px)}
 .page.active{display:block}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.col{background:#fff;border-radius:14px;border:1px solid #e8e8e4;overflow:hidden}
-.col-head{padding:10px 12px;border-bottom:1px solid #f0f0ec;display:flex;align-items:center;gap:6px;position:sticky;top:0;background:#fff;z-index:2}
+.col{background:#fff;border-radius:14px;border:1px solid #e8e8e4;overflow:visible}
+.col-head{padding:10px 12px;border-bottom:1px solid #f0f0ec;display:flex;align-items:center;gap:6px;position:sticky;top:0;background:#fff;z-index:3;border-radius:14px 14px 0 0}
 .col-icon{width:28px;height:28px;border-radius:8px;background:#e8f4ee;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;cursor:pointer}
 .col-title-input{font-size:16px;font-weight:400;color:#1a1a18;background:transparent;border:none;outline:none;width:100%;min-width:0}
 .col-title-input::placeholder{color:#ccc}
@@ -125,9 +125,9 @@ function loadState(){
     activePage:0,
     pages:[
       {id:'todo',name:'やること',type:'todo'},
+      {id:'travel',name:'交通費',type:'travel'},
       {id:1,name:'日課①',cols:['お風呂掃除','糸ようじ'],icons:['🧹','🦷']},
-      {id:2,name:'日課②',cols:['',''],icons:['💊','🏃']},
-      {id:'travel',name:'交通費',type:'travel'}
+      {id:2,name:'日課②',cols:['',''],icons:['💊','🏃']}
     ],
     checks:{},todos:[],openMonths:{},travels:[]
   };
@@ -160,20 +160,32 @@ let todayEl=null;
 let activePageEl=null;
 
 function scrollToToday(smooth=true){
-  if(!todayEl||!activePageEl) return;
+  if(!todayEl) return;
   // 今月が閉じていたら開く
   const monthDates=todayEl.closest('.month-dates');
   if(monthDates&&!monthDates.classList.contains('open')){
     monthDates.classList.add('open');
-    const arrow=monthDates.previousElementSibling?.querySelector('.month-arrow');
+    const arrow=monthDates.previousElementSibling&&monthDates.previousElementSibling.querySelector('.month-arrow');
     if(arrow) arrow.classList.add('open');
   }
-  requestAnimationFrame(()=>{
-    const pageRect=activePageEl.getBoundingClientRect();
-    const rowRect=todayEl.getBoundingClientRect();
-    const offset=rowRect.top-pageRect.top+activePageEl.scrollTop-(activePageEl.clientHeight/2)+(rowRect.height/2);
-    activePageEl.scrollTo({top:Math.max(0,offset),behavior:smooth?'smooth':'instant'});
-  });
+  // スクロール可能な親要素を探す
+  function findScrollParent(el){
+    if(!el) return window;
+    const style=window.getComputedStyle(el);
+    if(style.overflowY==='auto'||style.overflowY==='scroll') return el;
+    return findScrollParent(el.parentElement);
+  }
+  setTimeout(()=>{
+    const scrollEl=findScrollParent(todayEl.parentElement);
+    const elRect=todayEl.getBoundingClientRect();
+    if(scrollEl===window){
+      window.scrollTo({top:window.scrollY+elRect.top-(window.innerHeight/2),behavior:smooth?'smooth':'instant'});
+    } else {
+      const parentRect=scrollEl.getBoundingClientRect();
+      const offset=elRect.top-parentRect.top+scrollEl.scrollTop-(scrollEl.clientHeight/2)+(elRect.height/2);
+      scrollEl.scrollTo({top:Math.max(0,offset),behavior:smooth?'smooth':'instant'});
+    }
+  },smooth?0:50);
 }
 
 function renderTravelPage(){
@@ -299,6 +311,14 @@ function renderTodoPage(){
       const chk=document.createElement('button');chk.className='todo-check'+(todo.done?' done':'');
       chk.onclick=()=>{const t=state.todos.find(x=>x.id===todo.id);if(t){t.done=!t.done;saveState();renderList();}};
       const txt=document.createElement('div');txt.className='todo-text'+(todo.done?' done':'');txt.textContent=todo.text;
+      txt.title='タップで編集';
+      txt.onclick=()=>{
+        const newText=prompt('タスクを編集:',todo.text);
+        if(newText===null) return;
+        const t=state.todos.find(x=>x.id===todo.id);
+        if(t){t.text=newText.trim()||todo.text;saveState();renderList();}
+      };
+      txt.style.cursor='pointer';
       const moveUp=document.createElement('button');moveUp.className='todo-move';moveUp.textContent='▲';
       moveUp.onclick=()=>{const idx=state.todos.findIndex(x=>x.id===todo.id);if(idx>0){const tmp=state.todos[idx-1];state.todos[idx-1]=state.todos[idx];state.todos[idx]=tmp;saveState();renderList();}};
       const moveDown=document.createElement('button');moveDown.className='todo-move';moveDown.textContent='▼';
@@ -429,7 +449,7 @@ function render(){
   const addBtn=document.createElement('button');addBtn.className='tab-add';addBtn.textContent='＋';
   addBtn.onclick=()=>{
     const id=Date.now();
-    const trackerPages=state.pages.filter(p=>p.type!=='todo');
+    const trackerPages=state.pages.filter(p=>p.type!=='todo'&&p.type!=='travel');
     const nextNum=trackerPages.length+1;
     const nums=['①','②','③','④','⑤','⑥','⑦','⑧','⑨','⑩'];
     const name='日課'+(nums[nextNum-1]||nextNum);
